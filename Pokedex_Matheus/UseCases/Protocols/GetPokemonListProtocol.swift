@@ -10,5 +10,5 @@ import Foundation
 import Combine
 
 protocol GetPokemonListProtocol {
-    func execute(_ offset: Int, _ limit: Int) -> AnyPublisher<[PokemonListModel], Error>
+    func execute(_ offset: Int, _ limit: Int) -> AnyPublisher<[PokemonListModel], UseCaseError>
 }

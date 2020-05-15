@@ -65,7 +65,7 @@ final class PokemonDetailsViewModel: ObservableObject {
 extension PokemonDetailsViewModel: PokemonDetailsViewModelProtocol {
     
     func fetchPokemonDetails() {
-        let response:AnyPublisher<PokemonModel, Error> = useCase.execute(recivedId)
+        let response = useCase.execute(recivedId)
         
         response.sink(receiveCompletion: { _ in
         }, receiveValue: { result in

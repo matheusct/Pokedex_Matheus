@@ -30,7 +30,7 @@ extension PokemonListViewModel: PokemonListViewModelProtocol {
             return
         }
         
-        let response:AnyPublisher<[PokemonListModel], Error> = useCase.execute(count, count+limit)
+        let response = useCase.execute(count, count+limit)
             
         response.sink(receiveCompletion: { _ in },
                   receiveValue: { result in

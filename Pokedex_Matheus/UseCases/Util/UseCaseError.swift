@@ -8,6 +8,6 @@
 
 import Foundation
 
-enum UseCaseErro: Error, LocalizedError {
+enum UseCaseError: Error, LocalizedError, Equatable {
     case unexpectedError
 }

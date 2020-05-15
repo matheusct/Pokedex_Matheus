@@ -19,4 +19,36 @@ class TestUtils {
         }
         return try? JSONDecoder().decode(T.self, from: data)
     }
+    
+    func validateAbilities(resultAbilities: [AbilityModel], clientAbilities: [AbilityResponse]) -> Bool {
+        var contains = true
+        for ability in clientAbilities {
+            if !resultAbilities.contains(where: { (model) -> Bool in
+                return model.isHidden == ability.isHidden && model.name == ability.ability.name
+            }) {
+                contains = false
+            }
+        }
+        return contains
+    }
+    
+    func validateMoves(resultMoves: [String], clientMoves: [MoveResponse]) -> Bool {
+        var contains = true
+        for move in clientMoves {
+            if !resultMoves.contains(move.move.name){
+                contains = false
+            }
+        }
+        return contains
+    }
+    
+    func validateSprites(resultSprites: [String], clientSprites: Dictionary<String,String?>) -> Bool {
+        var contains = true
+        for sprite in clientSprites {
+            if sprite.value != nil && !resultSprites.contains(sprite.value!){
+                contains = false
+            }
+        }
+        return contains
+    }
 }

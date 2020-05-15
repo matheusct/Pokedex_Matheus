@@ -17,17 +17,17 @@ class GetPokemonDetails {
         self.gateway = gateway
     }
     
-    fileprivate func handleError(_ gatewayError: GatewayError) -> UseCaseErro {
+    fileprivate func handleError(_ gatewayError: GatewayError) -> UseCaseError {
         switch gatewayError {
         case .integrationErro:
-            return UseCaseErro.unexpectedError
+            return UseCaseError.unexpectedError
         }
     }
 }
 
 extension GetPokemonDetails: GetPokemonDetailsProtocol {
-    func execute(_ id: Int) -> AnyPublisher<PokemonModel, UseCaseErro> {
-        return gateway.getPokemonDetails(id).mapError { (error) -> UseCaseErro in
+    func execute(_ id: Int) -> AnyPublisher<PokemonModel, UseCaseError> {
+        return gateway.getPokemonDetails(id).mapError { (error) -> UseCaseError in
             return self.handleError(error)
         }.eraseToAnyPublisher()
     }

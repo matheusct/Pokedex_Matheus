@@ -7,7 +7,8 @@
 //
 
 import Foundation
+import Combine
 
 protocol AddFavoritePokemonProtocol {
-    func execute(pokemon: PokemonModel)
+    func execute(pokemon: PokemonModel) -> AnyPublisher<Bool, UseCaseError>
 }

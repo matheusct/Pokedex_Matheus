@@ -18,6 +18,13 @@ class GetPokemonList {
         self.gateway = gateway
     }
     
+    fileprivate func handleError(_ gatewayError: GatewayError) -> UseCaseError {
+        switch gatewayError {
+        case .integrationErro:
+            return UseCaseError.unexpectedError
+        }
+    }
+    
     private func getPokemonId(from url: String) -> Int{
         do{
             let regex = try NSRegularExpression(pattern: #"((?<=\/)[0-9]\d*(?=\/))"#)
@@ -45,8 +52,10 @@ class GetPokemonList {
 }
 
 extension GetPokemonList: GetPokemonListProtocol {
-    func execute(_ offset: Int, _ limit: Int) -> AnyPublisher<[PokemonListModel], Error> {
-        gateway.getPokemonList(offset, limit).map{response in
+    func execute(_ offset: Int, _ limit: Int) -> AnyPublisher<[PokemonListModel], UseCaseError> {
+        return gateway.getPokemonList(offset, limit).mapError({ (gatewayError) -> UseCaseError in
+            self.handleError(gatewayError)
+        }).map{response in
             var result:[PokemonListModel] = []
             var id: Int
             for item in response {
@@ -56,6 +65,4 @@ extension GetPokemonList: GetPokemonListProtocol {
             return result
         }.eraseToAnyPublisher()
     }
-    
-    
 }

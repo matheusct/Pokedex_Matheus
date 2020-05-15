@@ -10,5 +10,5 @@ import Foundation
 import Combine
 
 protocol GetPokemonDetailsProtocol {
-    func execute(_ id: Int) -> AnyPublisher<PokemonModel, UseCaseErro>
+    func execute(_ id: Int) -> AnyPublisher<PokemonModel, UseCaseError>
 }

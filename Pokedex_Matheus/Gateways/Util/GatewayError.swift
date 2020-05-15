@@ -8,6 +8,6 @@
 
 import Foundation
 
-enum GatewayError: Error, LocalizedError {
+enum GatewayError: Error, LocalizedError, Equatable {
     case integrationErro(String)
 }
